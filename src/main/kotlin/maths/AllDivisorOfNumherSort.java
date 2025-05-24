@@ -16,7 +16,6 @@ class Solution {
                 }
             }
         }
-
         for (int i = j - 1; i >= 0; i--) {
             System.out.print(output[i] + " ");
         }
