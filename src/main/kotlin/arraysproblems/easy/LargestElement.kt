@@ -7,6 +7,9 @@ fun main() {
         print(i)
     }
     val rArray = intArrayOf(10)
+    rArray.sort()
+
+    rArray.sum()
     rArray[0] = 90
 
 }
@@ -86,4 +89,13 @@ fun moveZeroes(nums: IntArray): Unit {
         }
     }
 
+}
+
+fun missingNumber(nums: IntArray): Int {
+    val sum = nums.sum()
+    var totalSum = 0
+    for (i in 0..nums.size) {
+        totalSum += i
+    }
+    return totalSum - sum
 }
