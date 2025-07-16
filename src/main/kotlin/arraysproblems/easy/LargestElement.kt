@@ -7,7 +7,6 @@ fun main() {
         print(i)
     }
     val rArray = intArrayOf(10)
-    rArray.set()
     rArray[0] = 90
 
 }
