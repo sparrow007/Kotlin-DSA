@@ -3,14 +3,9 @@ package arraysproblems.easy
 import java.util.SortedSet
 
 fun main() {
-    for (i in 9 downTo 0) {
-        print(i)
-    }
-    val rArray = intArrayOf(10)
-    rArray.sort()
 
-    rArray.sum()
-    rArray[0] = 90
+    val res = 6 xor 1 xor 2 xor 1 xor 2
+    println(res)
 
 }
 
@@ -98,4 +93,30 @@ fun missingNumber(nums: IntArray): Int {
         totalSum += i
     }
     return totalSum - sum
+}
+
+fun subarraySum(nums: IntArray, k: Int): Int {
+    var sum = 0
+    var n = 0
+    for (i in 0 until nums.size) {
+        if (nums[i] == k) {
+            n++
+        }
+
+        sum += nums[i]
+
+        if (sum == k && i > 0) {
+            n++
+            sum = nums[i]
+        } else if (sum > k) {
+            sum = 0
+        }
+    }
+
+    //total array sum
+    if (nums.sum() == k) {
+        n++
+    }
+
+    return n
 }
