@@ -139,6 +139,27 @@ fun longestSum(nums: IntArray, k: Int) {
         map.putIfAbsent(sum, i)
 
     }
+}
 
-    println(l)
+fun twoSum(nums: IntArray, target: Int): IntArray {
+    val map = HashMap<Int, Int>()
+    val res = IntArray(2) {
+        0
+    }
+
+    for (i in nums.indices) {
+        map.putIfAbsent(nums[i], i)
+    }
+
+    for (i in nums.indices) {
+        val remNumber = target - (nums[i])
+        val rem = map.get(remNumber)
+        if (rem != null && rem != i) {
+            res[0] = rem
+            res[1] = i
+
+            break
+        }
+    }
+    return res
 }
