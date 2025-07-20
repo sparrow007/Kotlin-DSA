@@ -1,11 +1,11 @@
 package arraysproblems.easy
 
-import java.util.SortedSet
+
+import kotlin.collections.HashMap
 
 fun main() {
 
-    val res = 6 xor 1 xor 2 xor 1 xor 2
-    println(res)
+    println(longestSum(intArrayOf(10, -10, 20, 30), 5))
 
 }
 
@@ -68,6 +68,8 @@ fun removeDuplicates(nums: IntArray): Int {
 
 
 fun moveZeroes(nums: IntArray): Unit {
+    val hasMap = HashMap<Int, Int>()
+
     val size = nums.size
     for (i in 0 until size) {
         if (nums[i] == 0) {
@@ -93,4 +95,50 @@ fun missingNumber(nums: IntArray): Int {
         totalSum += i
     }
     return totalSum - sum
+}
+
+
+fun subarraySum(nums: IntArray, k: Int): Int {
+    val prefixSum = HashMap<Int, Int>()
+    var no = 0
+    var sum = 0
+    prefixSum.put(0, 1)
+
+
+    for (i in 0 until nums.size) {
+
+        sum += nums[i]
+        val rem = prefixSum.get(sum-k)
+
+        if (rem != null) {
+            no += rem
+        }
+
+        prefixSum[sum] = prefixSum.getOrDefault(sum, 0) + 1
+    }
+
+    return no
+}
+
+fun longestSum(nums: IntArray, k: Int) {
+    val map = HashMap<Int, Int>()
+    var l = 0
+    var sum = 0
+
+    for (i in nums.indices) {
+
+        sum += nums[i]
+        val rem = map.get(sum - k)
+        if (sum == k) {
+            l = Math.max(l, i+1)
+        } else if ( rem !=  null) {
+            val subLen = i-rem
+            l = Math.max(l, subLen + 1)
+        }
+
+        map.putIfAbsent(sum, i)
+
+    }
+
+    println(l)
 }
