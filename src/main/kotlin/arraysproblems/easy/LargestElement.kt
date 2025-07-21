@@ -163,3 +163,35 @@ fun twoSum(nums: IntArray, target: Int): IntArray {
     }
     return res
 }
+
+fun sortColors(nums: IntArray): Unit {
+    var one = 0
+    var two = 0
+    var zero = 0
+
+    for (i in nums) {
+        if (i == 0) {
+            zero++
+        } else if (i == 1) {
+            one++
+        } else {
+            two++
+        }
+    }
+
+    for (i in nums.indices) {
+        if (zero > 0) {
+
+            nums[i] = 0
+            zero--
+
+        } else if (one > 0){
+            nums[i] = 1
+            one--
+
+        } else {
+            nums[i] = 2
+            two--
+        }
+    }
+}
