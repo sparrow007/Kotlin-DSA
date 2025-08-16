@@ -35,6 +35,7 @@ fun getMaxSubArray(array: IntArray): IntArray {
             initialIndex = i  + 1
         }
     }
+
     val result = IntArray((maxEndIndex-maxInitialIndex)+1)
     for (i in maxInitialIndex..maxEndIndex) {
         result[abs(maxInitialIndex - i)] = array[i]
