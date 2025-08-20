@@ -40,3 +40,34 @@ fun maxProfit(prices: IntArray): Int {
     }
     return profit
 }
+
+
+fun rearrangeArrayP1(nums: IntArray): IntArray {
+    val subArraySize = nums.size / 2
+    val postiveArray = IntArray(subArraySize)
+    val negativeArray = IntArray(subArraySize)
+    val result = IntArray(nums.size)
+
+    var pIndex = 0
+    var nIndex = 0
+    for (i in 0 until nums.size) {
+        if (nums[i] > 0) {
+            postiveArray[pIndex++] = nums[i]
+        } else {
+            negativeArray[nIndex++] = nums[i]
+        }
+    }
+
+    pIndex = 0
+    nIndex = 0
+
+    for (i in 0 until nums.size) {
+        if (i %2 == 0) {
+            result[i] = postiveArray[pIndex++]
+        } else {
+            result[i] = negativeArray[nIndex++]
+        }
+    }
+
+    return result
+}
