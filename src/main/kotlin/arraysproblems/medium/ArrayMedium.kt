@@ -1,20 +1,15 @@
 package arraysproblems.medium
 
 import kotlin.math.abs
-import kotlin.math.max
 
 fun main() {
-    val array = intArrayOf(1,2,5,-7,2,6)
-    val result = getMaxSubArray(array)
-    for (i in result) {
-        println(i)
-    }
+    val array = intArrayOf(7,6,4,3,1)
+    val result = maxProfit(array)
+    println(result)
 }
 
 
 fun getMaxSubArray(array: IntArray): IntArray {
-
-    val hashmap = HashMap<Int, Pair<Int, Int>>()
     var initialIndex = 0
     var maxSum = Int.MIN_VALUE
     var maxInitialIndex = 0
@@ -22,18 +17,7 @@ fun getMaxSubArray(array: IntArray): IntArray {
     var sum = 0
     for (i in 0 until array.size) {
 
-        sum += array[i]
 
-        if (maxSum < sum) {
-            maxInitialIndex  = initialIndex
-            maxEndIndex = i
-            maxSum = sum
-        }
-
-        if (sum < 0) {
-            sum = 0
-            initialIndex = i  + 1
-        }
     }
 
     val result = IntArray((maxEndIndex-maxInitialIndex)+1)
@@ -42,4 +26,17 @@ fun getMaxSubArray(array: IntArray): IntArray {
     }
 
     return result
+}
+
+
+fun maxProfit(prices: IntArray): Int {
+    var maxSell = prices[prices.size-1]
+    var profit = 0
+
+    for (i in prices.size-1 downTo 0) {
+        val cost = maxSell - prices[i]
+        profit = Math.max(profit, cost)
+        maxSell = Math.max(maxSell, prices[i])
+    }
+    return profit
 }
