@@ -1,11 +1,15 @@
 package arraysproblems.medium
 
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.abs
 
 fun main() {
-    val array = intArrayOf(7,6,4,3,1)
-    val result = maxProfit(array)
-    println(result)
+    val array = intArrayOf(1, 2, 5, 3, 1, 2)
+    val result = ladderInArray(array)
+    result.forEach {
+        print(it)
+    }
 }
 
 
@@ -70,4 +74,47 @@ fun rearrangeArrayP1(nums: IntArray): IntArray {
     }
 
     return result
+}
+
+fun nextPermutation(nums: IntArray): Unit {
+    var ind = -1
+    val size = nums.size
+
+    for (i in size-2 downTo 0) {
+        if (nums[i] < nums[i+1]) {
+            ind = i
+            break
+        }
+    }
+
+    if (ind == -1) {
+        nums.reverse()
+        return
+    }
+
+    for (i in size - 1 downTo  ind) {
+        if (nums[ind] < nums[i]) {
+            val temp = nums[ind]
+            nums[ind] = nums[i]
+            nums[i] = temp
+            break
+        }
+    }
+
+    nums.sort(fromIndex =  ind + 1)
+    println(nums)
+
+}
+
+fun ladderInArray(nums: IntArray): ArrayList<Int> {
+    val res = ArrayList<Int>()
+    res.add(index = 0, nums[nums.size - 1])
+    for (i in nums.size - 2 downTo 0) {
+        val top = res[0]
+        if (nums[i] > top) {
+            res.add(index = 0, nums[i])
+        }
+    }
+
+    return res
 }
