@@ -1,15 +1,14 @@
 package arraysproblems.medium
 
-import java.util.*
+import java.util.Collections.sort
 import kotlin.collections.ArrayList
 import kotlin.math.abs
+import kotlin.math.max
 
 fun main() {
-    val array = intArrayOf(1, 2, 5, 3, 1, 2)
-    val result = ladderInArray(array)
-    result.forEach {
-        print(it)
-    }
+    val array = intArrayOf(9,1,4,7,3,-1,0,5,8,-1,6)
+    val result = longestConsecutive(array)
+    print(result)
 }
 
 
@@ -117,4 +116,31 @@ fun ladderInArray(nums: IntArray): ArrayList<Int> {
     }
 
     return res
+}
+
+fun longestConsecutive(nums: IntArray): Int {
+    if (nums.size == 0) return 0
+
+    nums.sort()
+    var lcs = 0
+    var cc = 0
+    var ne = nums[0]-1
+    for (i in 0 until nums.size) {
+        if (nums[i] == ne+1) {
+            //update the count
+            cc++
+            ne++
+        } else if (nums[i] == ne) {
+            continue
+        }
+        else {
+            ne = nums[i]
+            cc = 1
+        }
+
+        lcs = max(lcs, cc)
+    }
+
+    return lcs
+
 }
